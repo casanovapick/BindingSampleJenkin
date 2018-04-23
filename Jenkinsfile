@@ -23,7 +23,7 @@ node {
    }
 
    stage('Packaging') {
-      sh "./gradlew assemble --offline"
+      sh "./gradlew assemble"
    }
 
    stage('Upload'){
