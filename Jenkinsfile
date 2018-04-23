@@ -1,6 +1,6 @@
 def GIT_URL = 'https://github.com/casanovapick/BindingSample.git'
 def BRANCH = 'master'
-def projectVersion='1.0.0'
+def projectVersion='1.0.0 (build)'
 node {
    stage('Preparation') {
       git url: "${GIT_URL}" ,branch: "${BRANCH.replaceAll(".*/","")}"
@@ -14,7 +14,7 @@ node {
 
    stage('Static code analysis'){
       def props = readProperties defaults: d, file: 'dir/version.properties'
-      projectVersion = props[versionName]+"(${props[build]})"
+      projectVersion = props[versionName]+"(build${props[build]})"
       def workspace = pwd() 
       def SONAR_SETTING = "${workspace}@script/sonar-project.properties"
       sh "/Users/wannnasit.chaiphinan/Library/SonarScanner/bin/sonar-scanner  -Dproject.settings=${SONAR_SETTING} -Dsonar.projectVersion=${projectVersion}"
