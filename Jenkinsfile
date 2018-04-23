@@ -16,7 +16,7 @@ node {
       def props = readProperties file: 'version.properties'
       def build = props['build']
       def versionName = props['versionName']
-      projectVersion = "${versionName}(${build})"
+      projectVersion = "${versionName}build${build}"
       def workspace = pwd() 
       def SONAR_SETTING = "${workspace}@script/sonar-project.properties"
       sh "/Users/wannnasit.chaiphinan/Library/SonarScanner/bin/sonar-scanner  -Dproject.settings=${SONAR_SETTING} -Dsonar.projectVersion=${projectVersion}"
