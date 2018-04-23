@@ -13,7 +13,7 @@ node {
    }
 
    stage('Static code analysis'){
-      def props = readProperties file: 'dir/version.properties'
+      def props = readProperties file: 'version.properties'
       projectVersion = props[versionName]+"(build${props[build]})"
       def workspace = pwd() 
       def SONAR_SETTING = "${workspace}@script/sonar-project.properties"
