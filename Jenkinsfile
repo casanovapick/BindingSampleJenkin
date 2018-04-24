@@ -25,7 +25,6 @@ node {
 
    stage('Packaging') {
       sh "git clone https://github.com/CyberioMor/keystore"
-      sh "rm k"
       sh "./gradlew assemble"
       sh "rm -rf keystore"
    }
