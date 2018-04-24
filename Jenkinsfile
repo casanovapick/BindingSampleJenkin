@@ -33,8 +33,7 @@ node {
    }
 
    stage('Update new build number'){
-
-      sh "git commit -m \"${projectVersion}\" version.properties"
-      sh "git push"
+      sh "git commit -m \'${projectVersion}\'version.properties"
+      sh "git push origin ${BRANCH.replaceAll(".*/","")"
    }
 }
