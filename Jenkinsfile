@@ -6,7 +6,7 @@ node {
       git url: "${GIT_URL}" ,branch: "${BRANCH.replaceAll(".*/","")}"
       sh "git clean -fdx"
       sh "./gradlew clean"
-      sh "./gredlew increaseBuildNumber"
+      sh "./gradlew increaseBuildNumber"
    }
 
    stage('Unit Tests') {
