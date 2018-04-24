@@ -6,6 +6,7 @@ node {
       git url: "${GIT_URL}" ,branch: "${BRANCH.replaceAll(".*/","")}"
       sh "git clean -fdx"
       sh "./gradlew clean"
+      sh "./gredlew increaseBuildNumber"
    }
 
    stage('Unit Tests') {
@@ -29,5 +30,10 @@ node {
    stage('Upload'){
       sh "zip -r artifact.zip . -i *.apk"
       nexusArtifactUploader artifacts: [[artifactId: 'sample', classifier: '', file: 'artifact.zip', type: 'zip']], credentialsId: 'cedf432b-2dd2-4e3c-ae6a-11780cf6244d', groupId: 'mobile.android', nexusUrl: 'localhost:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: projectVersion
+   }
+
+   stage('Update new build number'){
+   git commit -m 'my notes' -- path/to/my/file.ext
+      sh "git commit -m \"${projectVersion}\" version.properties"
    }
 }
