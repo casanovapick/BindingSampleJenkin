@@ -33,7 +33,8 @@ node {
    }
 
    stage('Update new build number'){
-   git commit -m 'my notes' -- path/to/my/file.ext
+
       sh "git commit -m \"${projectVersion}\" version.properties"
+      sh "git push"
    }
 }
