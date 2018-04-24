@@ -24,11 +24,14 @@ node {
    }
 
    stage('Packaging') {
+      sh "git clone https://github.com/CyberioMor/keystore"
+      sh "rm k"
       sh "./gradlew assemble"
+      sh "rm -rf keystore"
    }
 
    stage('Upload'){
-      sh "zip -r artifact.zip . -i *.apk"
+      sh "zip -rj artifact.zip . -i *.apk"
       nexusArtifactUploader artifacts: [[artifactId: 'sample', classifier: '', file: 'artifact.zip', type: 'zip']], credentialsId: 'cedf432b-2dd2-4e3c-ae6a-11780cf6244d', groupId: 'mobile.android', nexusUrl: 'localhost:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: projectVersion
    }
 
