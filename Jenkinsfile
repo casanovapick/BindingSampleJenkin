@@ -20,7 +20,7 @@ node {
       projectVersion = "${versionName}build${build}"
       def workspace = pwd() 
       def SONAR_SETTING = "${workspace}@script/sonar-project.properties"
-      def scannerHome = tool 'SonarQube Scanner 2.8';
+      def scannerHome = tool 'SonarQube Scanner';
       sh "${scannerHome}/bin/sonar-scanner  -Dproject.settings=${SONAR_SETTING} -Dsonar.projectVersion=${projectVersion}"
    }
 
