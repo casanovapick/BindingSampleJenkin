@@ -20,7 +20,7 @@ node {
       projectVersion = "${versionName}build${build}"
       def workspace = pwd() 
       def SONAR_SETTING = "${workspace}@script/sonar-project.properties"
-      sh "${sonar-scanner}  -Dproject.settings=${SONAR_SETTING} -Dsonar.projectVersion=${projectVersion}"
+      sh "sonar-scanner  -Dproject.settings=${SONAR_SETTING} -Dsonar.projectVersion=${projectVersion}"
    }
 
    stage('Packaging') {
