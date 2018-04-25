@@ -1,7 +1,7 @@
 def GIT_URL = 'https://github.com/casanovapick/BindingSample.git'
 def BRANCH = 'master'
 def projectVersion='1.0.0 (build)'
-node {
+pipeline {
    stage('Preparation') {
       git url: "${GIT_URL}" ,branch: "${BRANCH.replaceAll(".*/","")}"
       sh "git clean -fdx"
