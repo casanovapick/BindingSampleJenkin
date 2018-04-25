@@ -20,12 +20,7 @@ node {
       projectVersion = "${versionName}build${build}"
       def workspace = pwd() 
       def SONAR_SETTING = "${workspace}@script/sonar-project.properties"
-      def scannerHome ='';
-      script {
-          // requires SonarQube Scanner 2.8+
-          scannerHome = tool 'SonarQube Scanner 2.8'
-        }
-      sh "${scannerHome}/bin/sonar-scanner  -Dproject.settings=${SONAR_SETTING} -Dsonar.projectVersion=${projectVersion}"
+      sh "sonar-scanner  -Dproject.settings=${SONAR_SETTING} -Dsonar.projectVersion=${projectVersion}"
    }
 
    stage('Packaging') {
@@ -43,4 +38,11 @@ node {
       sh "git commit -m \"${projectVersion}\" version.properties"
       sh "git push origin ${BRANCH.replaceAll(".*/","")}"
    }
+
+   post {
+      failure {
+            echo 'JENKINS PIPELINE FAILED'
+            sh "rm -rf keystore"
+      }
+    }
 }
