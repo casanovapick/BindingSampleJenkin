@@ -38,11 +38,11 @@ node {
       sh "git commit -m \"${projectVersion}\" version.properties"
       sh "git push origin ${BRANCH.replaceAll(".*/","")}"
    }
+}
 
-   post {
-      failure {
+post {
+   failure {
             echo 'JENKINS PIPELINE FAILED'
             sh "rm -rf keystore"
-      }
-    }
+   }
 }
