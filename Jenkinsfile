@@ -24,16 +24,12 @@ node {
       }
 
       stage('Packaging') {
-          steps {
+          try {
             sh "git clone https://github.com/CyberioMor/keystore"
             sh "./gradlew assemble"
+         }finally{
             sh "rm -rf keystore"
-            }post{
-               failure {
-                  echo 'Packaging stage failed'
-                  sh "rm -rf keystore"
-                }
-            }
+         }
       }
 
       stage('Upload'){
