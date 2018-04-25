@@ -1,7 +1,6 @@
 def GIT_URL = 'https://github.com/casanovapick/BindingSample.git'
 def BRANCH = 'master'
 def projectVersion='1.0.0 (build)'
-def scannerHome = tool 'SonarQube Scanner 2.8'
 node {
    stage('Preparation') {
       git url: "${GIT_URL}" ,branch: "${BRANCH.replaceAll(".*/","")}"
@@ -21,6 +20,7 @@ node {
       projectVersion = "${versionName}build${build}"
       def workspace = pwd() 
       def SONAR_SETTING = "${workspace}@script/sonar-project.properties"
+      def scannerHome = tool 'SonarQube Scanner 2.8';
       sh "${scannerHome}/bin/sonar-scanner  -Dproject.settings=${SONAR_SETTING} -Dsonar.projectVersion=${projectVersion}"
    }
 
