@@ -33,7 +33,7 @@ node {
       }
 
       stage('Upload Google play'){
-         androidApkMove apkFilesPattern: '*-release.apk', applicationId: '', fromVersionCode: false, googleCredentialsId: 'SampleBinding', rolloutPercentage: '100%', trackName: 'beta', versionCodes: ''
+         androidApkMove apkFilesPattern: '**/*-release.apk', applicationId: '', fromVersionCode: false, googleCredentialsId: 'SampleBinding', rolloutPercentage: '100%', trackName: 'beta', versionCodes: ''
       }
 
       stage('Upload'){
