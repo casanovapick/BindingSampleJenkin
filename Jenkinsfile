@@ -33,7 +33,7 @@ node {
       }
 
       stage('Upload Google play'){
-         androidApkUpload apkFilesPattern: '**/*-release.apk', deobfuscationFilesPattern: '**/mapping.txt', googleCredentialsId: 'SampleBinding', recentChangeList: [[language: 'en-US', text: 'version']], rolloutPercentage: '100%', trackName: 'beta'
+         androidApkUpload apkFilesPattern: '**/*-release.apk', googleCredentialsId: 'SampleBinding', trackName: 'beta'
       }
 
       stage('Upload'){
