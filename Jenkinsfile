@@ -32,6 +32,10 @@ node {
          }
       }
 
+      stage('Upload Google play'){
+         androidApkMove apkFilesPattern: '*-release.apk', applicationId: '', fromVersionCode: false, googleCredentialsId: 'SampleBinding', rolloutPercentage: '100%', trackName: 'beta', versionCodes: ''
+      }
+
       stage('Upload'){
          sh "zip -rj artifact.zip . -i *.apk"
          nexusArtifactUploader artifacts: [[artifactId: 'sample', classifier: '', file: 'artifact.zip', type: 'zip']], credentialsId: 'cedf432b-2dd2-4e3c-ae6a-11780cf6244d', groupId: 'mobile.android', nexusUrl: 'localhost:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: projectVersion
@@ -41,5 +45,6 @@ node {
          sh "git commit -m \"${projectVersion}\" version.properties"
          sh "git push origin ${BRANCH.replaceAll(".*/","")}"
       }
+
 }
 
